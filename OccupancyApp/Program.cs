@@ -114,6 +114,16 @@ namespace OccupancyApp
                 item++;
             }
 
+            foreach (var roomTypeSettings in roomTypeSettingsListCorrect)
+            {
+                Console.WriteLine(roomTypeSettings.RoomTypeName);
+                foreach (OccRateLevel occRateLevel in roomTypeSettings.OccRateLevels)
+                {
+                    Console.WriteLine($"{occRateLevel.occupancyFrom}-{occRateLevel.occupancyTo} {occRateLevel.rateLevel}");
+                }
+                Console.WriteLine();
+            }
+
         }
 
         static List<OccRateLevel> GetOccRateLevels()
@@ -203,9 +213,6 @@ namespace OccupancyApp
             return occupancyResult;
         }
 
-        static List<OccRateLevel> GetOccCorrectIntervals(List<RoomTypeSettings> roomTypeSettingsList)
-        {
-            return ;
-        }
+
     }
 }
