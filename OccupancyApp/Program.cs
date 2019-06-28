@@ -4,22 +4,6 @@ using System.Linq;
 
 namespace OccupancyApp
 {
-    public class OccRateLevel
-    {
-        public int occupancyFrom { get; set; }
-
-        public int occupancyTo { get; set; }
-
-        public string rateLevel { get; set; }
-    }
-
-    public class RoomTypeSettings
-    {
-        public string RoomTypeName { get; set; }
-
-        public List<OccRateLevel> OccRateLevels { get; set; }
-    }
-
     public class Program
     {
         static void Main(string[] args)
@@ -28,6 +12,7 @@ namespace OccupancyApp
             Console.Write("Введит количество категорий номеров: ");
 
             int countRoomTypes = int.Parse(Console.ReadLine());
+
             for (int i = 0; i < countRoomTypes; i++)
             {
                 Console.Write("Введит название категории номера: ");
