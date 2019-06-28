@@ -68,15 +68,6 @@ namespace OccupancyApp
                 Console.WriteLine(typeBorder.occupancyFrom + " - " + typeBorder.occupancyTo);
             }
 
-            foreach (var roomTypeSettings in roomTypeSettingsList)
-            {
-                Console.WriteLine(roomTypeSettings.RoomTypeName);
-                foreach (OccRateLevel occRateLevel in roomTypeSettings.OccRateLevels)
-                {
-                    Console.WriteLine($"{occRateLevel.occupancyFrom}-{occRateLevel.occupancyTo} {occRateLevel.rateLevel}");
-                }
-                Console.WriteLine();
-            }
 
             List<RoomTypeSettings> roomTypeSettingsListCorrect = new List<RoomTypeSettings>();
 
