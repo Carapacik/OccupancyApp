@@ -80,7 +80,6 @@ namespace OccupancyApp
                 int ad = 0;
                 foreach (OccRateLevel typeBorder in occupancyResult)
                 {
-                    
                     if (typeBorder.occupancyTo < roomTypeSettings.OccRateLevels[ad].occupancyTo)
                     {
                         OccRateLevel correctOccupancy = new OccRateLevel();
