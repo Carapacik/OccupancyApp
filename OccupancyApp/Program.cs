@@ -20,18 +20,14 @@ namespace OccupancyApp
         public List<OccRateLevel> OccRateLevels { get; set; }
     }
 
-
     public class Program
     {
-
         static void Main(string[] args)
-
         {
             List<RoomTypeSettings> roomTypeSettingsList = new List<RoomTypeSettings>();
             Console.Write("Введит количество категорий номеров: ");
 
             int countRoomTypes = int.Parse(Console.ReadLine());
-
             for (int i = 0; i < countRoomTypes; i++)
             {
                 Console.Write("Введит название категории номера: ");
@@ -47,7 +43,6 @@ namespace OccupancyApp
                 };
 
                 roomTypeSettingsList.Add(occRateTypeName);
-
             }
 
             Console.WriteLine();
@@ -68,52 +63,9 @@ namespace OccupancyApp
                 Console.WriteLine(typeBorder.occupancyFrom + " - " + typeBorder.occupancyTo);
             }
 
-            List<RoomTypeSettings> roomTypeSettingsListCorrect = new List<RoomTypeSettings>();
+            List<RoomTypeSettings> roomTypeSettingsListCorrect = GetOccResultInCorrectForm(roomTypeSettingsList, occupancyResult);
 
-            foreach (var roomTypeSettings in roomTypeSettingsList)
-            {
-                RoomTypeSettings newRoomType = new RoomTypeSettings();
-                newRoomType.RoomTypeName = roomTypeSettings.RoomTypeName;
-
-                List<OccRateLevel> newOcc = new List<OccRateLevel>();
-                int ad = 0;
-                foreach (OccRateLevel typeBorder in occupancyResult)
-                {
-
-                    if (typeBorder.occupancyTo < roomTypeSettings.OccRateLevels[ad].occupancyTo)
-                    {
-                        OccRateLevel correctOccupancy = new OccRateLevel
-                        {
-                            occupancyFrom = typeBorder.occupancyFrom,
-                            occupancyTo = typeBorder.occupancyTo,
-                            rateLevel = roomTypeSettings.OccRateLevels[ad].rateLevel
-                        };
-
-                        newOcc.Add(correctOccupancy);
-                    }
-
-                    if(typeBorder.occupancyTo == roomTypeSettings.OccRateLevels[ad].occupancyTo)
-                    {
-                        OccRateLevel correctOccupancy = new OccRateLevel
-                        {
-                            occupancyFrom = typeBorder.occupancyFrom,
-                            occupancyTo = typeBorder.occupancyTo,
-                            rateLevel = roomTypeSettings.OccRateLevels[ad].rateLevel
-                        };
-
-                        newOcc.Add(correctOccupancy);
-
-                        ad++;
-                    }
-
-
-                    newRoomType.OccRateLevels = newOcc;
-                }
-
-                roomTypeSettingsListCorrect.Add(newRoomType);
-            }
-
-            Console.WriteLine()
+            Console.WriteLine();
             foreach (var roomTypeSettings in roomTypeSettingsListCorrect)
             {
                 Console.WriteLine(roomTypeSettings.RoomTypeName);
@@ -123,7 +75,6 @@ namespace OccupancyApp
                 }
                 Console.WriteLine();
             }
-
         }
 
         static List<OccRateLevel> GetOccRateLevels()
@@ -139,8 +90,6 @@ namespace OccupancyApp
                 string occupancy = newLineFromConsole.Split(' ')[0];
                 int[] parsedOccupancy = occupancy.Split("-").Select(int.Parse).ToArray();
                 string ratelevel = newLineFromConsole.Split(' ')[1];
-
-
 
                 OccRateLevel occRateLevel = new OccRateLevel();
                 occRateLevel.rateLevel = ratelevel;
@@ -213,6 +162,49 @@ namespace OccupancyApp
             return occupancyResult;
         }
 
+        static List<RoomTypeSettings> GetOccResultInCorrectForm(List<RoomTypeSettings> roomTypeSettingsList, List<OccRateLevel> occupancyResult)
+        {
+            List<RoomTypeSettings> roomTypeSettingsListCorrect = new List<RoomTypeSettings>();
 
+            foreach (var roomTypeSettings in roomTypeSettingsList)
+            {
+                RoomTypeSettings newRoomType = new RoomTypeSettings();
+                newRoomType.RoomTypeName = roomTypeSettings.RoomTypeName;
+
+                List<OccRateLevel> newOcc = new List<OccRateLevel>();
+                int ad = 0;
+                foreach (OccRateLevel typeBorder in occupancyResult)
+                {
+                    if (typeBorder.occupancyTo < roomTypeSettings.OccRateLevels[ad].occupancyTo)
+                    {
+                        OccRateLevel correctOccupancy = new OccRateLevel
+                        {
+                            occupancyFrom = typeBorder.occupancyFrom,
+                            occupancyTo = typeBorder.occupancyTo,
+                            rateLevel = roomTypeSettings.OccRateLevels[ad].rateLevel
+                        };
+
+                        newOcc.Add(correctOccupancy);
+                    }
+
+                    if (typeBorder.occupancyTo == roomTypeSettings.OccRateLevels[ad].occupancyTo)
+                    {
+                        OccRateLevel correctOccupancy = new OccRateLevel
+                        {
+                            occupancyFrom = typeBorder.occupancyFrom,
+                            occupancyTo = typeBorder.occupancyTo,
+                            rateLevel = roomTypeSettings.OccRateLevels[ad].rateLevel
+                        };
+
+                        newOcc.Add(correctOccupancy);
+                        ad++;
+                    }
+                    newRoomType.OccRateLevels = newOcc;
+                }
+                roomTypeSettingsListCorrect.Add(newRoomType);
+            }
+
+            return roomTypeSettingsListCorrect;
+        }
     }
 }
