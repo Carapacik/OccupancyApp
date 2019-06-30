@@ -1,75 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OccupancyApp
 {
-    public class Program
+    public class OccupancyUtils
     {
-        static void Main(string[] args)
-        {
-            List<RoomTypeSettings> roomTypeSettingsList = new List<RoomTypeSettings>();
-            Console.Write("Введит количество категорий номеров: ");
-
-            int countRoomTypes = int.Parse(Console.ReadLine());
-
-            for (int i = 0; i < countRoomTypes; i++)
-            {
-                Console.Write("Введит название категории номера: ");
-                string roomTypeName = Console.ReadLine();
-                List<string> roomTypeNames = new List<string>();
-                roomTypeNames.Add(roomTypeName);
-                List<OccRateLevel> occRateLevels = GetOccRateLevels();
-
-                RoomTypeSettings occRateTypeName = new RoomTypeSettings
-                {
-                    RoomTypeName = roomTypeName,
-                    OccRateLevels = occRateLevels
-                };
-
-                roomTypeSettingsList.Add(occRateTypeName);
-            }
-
-            Console.WriteLine();
-            foreach (var roomTypeSettings in roomTypeSettingsList)
-            {
-                Console.WriteLine(roomTypeSettings.RoomTypeName);
-                foreach (OccRateLevel occRateLevel in roomTypeSettings.OccRateLevels)
-                {
-                    Console.WriteLine($"{occRateLevel.occupancyFrom}-{occRateLevel.occupancyTo} {occRateLevel.rateLevel}");
-                }
-                Console.WriteLine();
-            }
-
-            List<OccRateLevel> occupancyResult = GetAllOccupancyIntervals(roomTypeSettingsList);
-
-            foreach (OccRateLevel typeBorder in occupancyResult)
-            {
-                Console.WriteLine(typeBorder.occupancyFrom + " - " + typeBorder.occupancyTo);
-            }
-
-            List<RoomTypeSettings> roomTypeSettingsListCorrect = GetOccResultInCorrectForm(roomTypeSettingsList, occupancyResult);
-
-            Console.WriteLine();
-            foreach (var roomTypeSettings in roomTypeSettingsListCorrect)
-            {
-                Console.WriteLine(roomTypeSettings.RoomTypeName);
-                foreach (OccRateLevel occRateLevel in roomTypeSettings.OccRateLevels)
-                {
-                    Console.WriteLine($"{occRateLevel.occupancyFrom}-{occRateLevel.occupancyTo} {occRateLevel.rateLevel}");
-                }
-                Console.WriteLine();
-            }
-        }
-
         static List<OccRateLevel> GetOccRateLevels()
         {
             List<OccRateLevel> occRateLevels = new List<OccRateLevel>();
-            Console.WriteLine("Введите сопоставления загрузки, пример '21-50 bar1'");
+            Console.WriteLine("������� ������������� ��������, ������ '21-50 bar1'");
 
             for (int count = 0; count < 50; count++)
             {
-                Console.Write("Сопоставление: ");
+                Console.Write("�������������: ");
 
                 string newLineFromConsole = Console.ReadLine();
                 string occupancy = newLineFromConsole.Split(' ')[0];
@@ -147,7 +91,7 @@ namespace OccupancyApp
             return occupancyResult;
         }
 
-        public static List<RoomTypeSettings> GetOccResultInCorrectForm(List<RoomTypeSettings> roomTypeSettingsList, List<OccRateLevel> occupancyResult)
+        static List<RoomTypeSettings> GetOccResultInCorrectForm(List<RoomTypeSettings> roomTypeSettingsList, List<OccRateLevel> occupancyResult)
         {
             List<RoomTypeSettings> roomTypeSettingsListCorrect = new List<RoomTypeSettings>();
 
@@ -191,5 +135,10 @@ namespace OccupancyApp
 
             return roomTypeSettingsListCorrect;
         }
+
+
+
+
+
     }
 }
