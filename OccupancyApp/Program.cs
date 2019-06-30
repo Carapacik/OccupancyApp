@@ -11,6 +11,7 @@ namespace OccupancyApp
             List<RoomTypeSettings> roomTypeSettingsList = new List<RoomTypeSettings>();
             Console.Write("Введит количество категорий номеров: ");
 
+
             int countRoomTypes = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < countRoomTypes; i++)
