@@ -13,7 +13,6 @@ namespace Web.Controllers
     {
         static List<RoomTypeSettings> roomTypeSettingsList = new List<RoomTypeSettings>();
 
-        int id = 0;
         static RoomTypeSettings _roomTypeSetting = new RoomTypeSettings
         {
             RoomTypeName = "Standart",
@@ -55,21 +54,20 @@ namespace Web.Controllers
         }
 
         // GET api/values/5
-        /*
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public RoomTypeSettings Get(int id)
         {
-            return $"{ _roomTypeSetting[id]}";
+            return roomTypeSettingsList[id];
         }
-        */
-        // POST api/values
-        /*
-        [HttpPost]
-        public void Post([FromBody] string value)
+
+        [HttpPost("{id}")]
+        public RoomTypeSettings ChangeRoomTypeName([FromBody] RoomTypeSettings _roomTypeSettings, int id)
         {
-            _roomTypeSetting.RoomTypeName.Add(value);
+            roomTypeSettingsList[id] = _roomTypeSettings;
+            return roomTypeSettingsList[id];
         }
-        */
+
+
         // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
