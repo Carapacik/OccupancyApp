@@ -1,6 +1,21 @@
 function post(){
 }
 
+$('form').submit(function () {
+
+    var obj = $('form').serializeJSON();
+
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:53760/api/roomtype-settings',
+        dataType: 'json',
+        data: JSON.stringify(obj),
+        contentType: 'application/json',
+        success: function (data) {
+            alert(data)
+        }
+    });
+
 var index = 0;
 
 function add() {
