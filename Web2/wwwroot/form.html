@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8"/>  
+    <title>Форма</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
+	<link rel="shortcut icon" href="images/icon_c.ico" type="image/x-icon">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/functions.js"></script>
+  </head>
+  <body>
+      <div class="form_full">
+          <form class="form_block" action="*" name="form_block" method="post">
+              <div class="form_item">
+                  <label class="headline_label">Название тарифа</label>
+                  <input name="roomTypeName" class="input_item_big" required />
+              </div>
+              <div class="form_item">
+                  <label class="headline_label">Загруженность</label>
+                  <label class="label_item">ОТ    -    ДО</label>
+                  <label class="label_item ratelevel">Ratelevel</label>
+              </div>
+              <div class="occupancy" id="toAdd">
+                  <input name="occupancyFrom" class="input_item" required />
+                  <input name="occupancyTo" class="input_item" required />
+                  <input name="rateLevel it1" class="input_item ratelevel" required />
+                  <br />
+                  <input name="occupancyFrom" class="input_item" required />
+                  <input name="occupancyTo" class="input_item" required />
+                  <input name="rateLevel it1" class="input_item ratelevel" required />
+                  <br/>
+              </div>
+              <button class="inline" onclick="add()" type="button">добавить строку</button>
+              <button  class="inline" onclick="remove()" type="button">убрать строку</button>
+              <div class="bottom">
+                  <button type="submit" onclick="post()">Загрузить список</button>
+              </div>
+          </form>
+      </div>
+        
+  </body>
+</html>
