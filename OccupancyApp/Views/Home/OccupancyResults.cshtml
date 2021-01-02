@@ -1,0 +1,31 @@
+﻿@model RoomTypeSettingsModel
+
+@{
+    ViewData["Title"] = "Результат";
+}
+
+@foreach (var item in Model.CorrectList)
+{
+    <div class="row form-group">
+        <h3>@item.RoomTypeName</h3>
+        <table class="table table-hover">
+            <thead>
+            <th>Интервал нагруженности</th>
+            <th>Тариф</th>
+            </thead>
+            <tbody>
+            @foreach (var rateLevel in item.RateLevels)
+            {
+                <tr>
+                    <td>
+                        <p>@rateLevel.OccupancyFrom - @rateLevel.OccupancyTo </p>
+                    </td>
+                    <td>
+                        <p>@rateLevel.OccupancyRateLevel</p>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}

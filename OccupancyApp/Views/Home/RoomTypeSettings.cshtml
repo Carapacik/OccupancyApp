@@ -1,0 +1,41 @@
+﻿@model RoomTypeSettingsModel
+
+@{
+    ViewData["Title"] = "Ввод данных для подсчёта";
+}
+
+<form asp-controller="Home" asp-action="OccupancyResults" method="post">
+    @for (var i = 0; i < Model.CorrectList.Count; i++)
+    {
+        <h3>@Model.CorrectList[i].RoomTypeName</h3>
+        <div class="row form-group">
+            <table class="table table-hover">
+                <thead>
+                <th></th>
+                <th>Интервал нагруженности</th>
+                <th></th>
+                <th>Тариф</th>
+                </thead>
+                <tbody>
+                @for (var j = 0; j < Model.CorrectList[i].RateLevels.Count; j++)
+                {
+                    <tr>
+                        <td>
+                            <input asp-for="@Model.CorrectList[i].RateLevels[j].OccupancyFrom" class="form-control" required placeholder="От" value="@null"/>
+                        </td>
+                        <td>-</td>
+                        <td>
+                            <input asp-for="@Model.CorrectList[i].RateLevels[j].OccupancyTo" class="form-control" required placeholder="До" value="@null"/>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.CorrectList[i].RateLevels[j].OccupancyRateLevel" class="form-control" required placeholder="Тип цены"/>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        <input asp-for="@Model.CorrectList[i].RoomTypeName" type="hidden"/>
+    }
+    <button class="btn btn-dark" type="submit">Посчитать</button>
+</form>
